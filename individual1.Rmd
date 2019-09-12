@@ -7,22 +7,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Question set (individual)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Coordinate with your teammate and decide among you who is Individual 1 and Individual 2, respectively. Each of you should create an RMarkdown file either named `individual1.Rmd` or `individual2.Rmd` to include the answers.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+**For each of the questions below provide at least one graphic as a basis for your answer.**
 
-```{r cars}
-summary(cars)
+1. How are ratings distributed? Don't forget to mention outliers, if there are any.
+- The rating is normally concentrated on 2.5 to 3.5. 
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+hist(choco$Rating)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+2. Do ratings depend on the cacao percentage of a chocolate bar? 
+3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.)
