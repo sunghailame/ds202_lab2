@@ -381,35 +381,35 @@ summary {
 <p>For example:</p>
 <pre class="r"><code>plot(choco$Rating,choco$Cocoa.Pct, xlab = &quot;Ratings&quot;, ylab = &quot;Cocoa Percentage&quot;, pch = 2, cex=2) # creates a plot with Ratings on x-axis and Cocoa Percentage of y-axis. The symbol of points is set to be a triangle (pch=2) and the size of the points is adjusted to be larger (cex=2). </code></pre>
 <p>If you are stuck, you can always go to R’s help documentation.</p>
-<pre class="r"><code>recent_rating = choco[choco$Review.Date&gt;2011,]
+<pre class="r"><code>recent_rating = choco[choco$Review.Date&gt;2011,] #creates a dataframe that has choco data with Review.Date being after 2011
 
-unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 
+unique(recent_rating$Company.Location) #gives us the possible values of a factor in choco Company.Location data. The level shows the possible values of a categorical variable.
 
-recent_rating$Company.Location = droplevels(recent_rating$Company.Location)
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location) #droplevels drops an object from which to drop unused factor levels. This line is updating the recent_rating so that it won&#39;t have any unused Company.Location levels.
 
-head(recent_rating)
+head(recent_rating) #it shows us the first part of the recent_rating vector
 
-cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location)
-cross_table
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location) #it shows the Review.Date, Company.Location data from recent_rating vector as a table and saves that into cross_table variable.
+cross_table #displays the cross_table
 
-which(cross_table[1,]!=0 &amp; cross_table[2,]!=0 &amp; cross_table[3,]!=0 &amp; cross_table[4,]!=0 &amp; cross_table[5,]!=0)
+which(cross_table[1,]!=0 &amp; cross_table[2,]!=0 &amp; cross_table[3,]!=0 &amp; cross_table[4,]!=0 &amp; cross_table[5,]!=0) #only shows the column that does not have 0s. For example, cross_table[1,]!=0 means the first cross table that is not 0.
 
 france_recent = subset(recent_rating,Company.Location ==&#39;France&#39;)
 uk_recent = subset(recent_rating,Company.Location ==&#39;U.K.&#39;)
-germany_recent = subset(recent_rating,Company.Location==&#39;Germany&#39;)
+germany_recent = subset(recent_rating,Company.Location==&#39;Germany&#39;) #this stores all the subsets of vectors which Company.Location is France, U.K, Germany in according variables.
 
-par(mfrow=c(2,2))
-color1 = ifelse(france_recent$Rating &gt;median(france_recent$Rating), &#39;blue&#39;, &#39;green&#39;)
-plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;France&quot;) 
-legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;blue&#39;,&#39;green&#39;),pch=18)
+par(mfrow=c(2,2)) #sets the parameter with a variable mfrow which stores column 2 and row 2
+color1 = ifelse(france_recent$Rating &gt;median(france_recent$Rating), &#39;blue&#39;, &#39;green&#39;) #sets the color blue if the Rating of france_recent dataframe is larger than the median of all the Rating of france_recent and sets the color green otherwise.
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;France&quot;) #plots a dot plot with y axis limit of 50 to 90(ylim), color as the green and blue color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as &quot;Review Date&quot;(xlab), labels y-axis as &quot;Cocoa Percentage&quot;(ylab), and looks the data from &quot;France&quot; dataframe(main).
+legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;blue&#39;,&#39;green&#39;),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color blue and green, and sets the point shape as diamond like above.
 
-color2 = ifelse(uk_recent$Rating &gt;median(uk_recent$Rating), &#39;purple&#39;, &#39;red&#39;)
-plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;UK&quot;)
-legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;purple&#39;,&#39;red&#39;),pch=18)
+color2 = ifelse(uk_recent$Rating &gt;median(uk_recent$Rating), &#39;purple&#39;, &#39;red&#39;) #sets another color set where it is purple when uk_recent Rating is larger than the median of the whole uk_recent Rating and red otherwise.
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;UK&quot;) #plots a dot plot with y axis limit of 50 to 90(ylim), color as the purle and red color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as &quot;Review Date&quot;(xlab), labels y-axis as &quot;Cocoa Percentage&quot;(ylab), and looks the data from &quot;UK&quot; dataframe(main).
+legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;purple&#39;,&#39;red&#39;),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color purple and red, and sets the point shape as diamond like above.
 
-color3 = ifelse(germany_recent$Rating &gt; median(germany_recent$Rating), &#39;orange&#39;, &#39;yellow&#39;)
-plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;Germany&quot;) 
-legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;orange&#39;,&#39;yellow&#39;),pch=18)</code></pre>
+color3 = ifelse(germany_recent$Rating &gt; median(germany_recent$Rating), &#39;orange&#39;, &#39;yellow&#39;) #sets another color set where it is orange when uk_recent Rating is larger than the median of the whole uk_recent Rating and yellow otherwise.
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab=&quot;Review Date&quot;, ylab= &quot;Cocoa Percentage&quot;, main= &quot;Germany&quot;) #plots a dot plot with y axis limit of 50 to 90(ylim), color as the orange and yellow color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as &quot;Review Date&quot;(xlab), labels y-axis as &quot;Cocoa Percentage&quot;(ylab), and looks the data from &quot;Germany&quot; dataframe(main).
+legend(&#39;bottomright&#39;,legend=c(&#39;High Rating&#39;, &#39;Low Rating&#39;),col=c(&#39;orange&#39;,&#39;yellow&#39;),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color orange and yellow, and sets the point shape as diamond like above.</code></pre>
 <p>2 . Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement.</p>
 <p>3 . How does the <strong>number</strong> of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.</p>
 <p>4 . How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function <code>sort()</code> might come in handy here.</p>
