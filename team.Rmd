@@ -29,35 +29,35 @@ If you are stuck, you can always go to R's help documentation.
 
 
 ```{r, eval=FALSE}
-recent_rating = choco[choco$Review.Date>2011,]
+recent_rating = choco[choco$Review.Date>2011,] #creates a dataframe that has choco data with Review.Date being after 2011
 
-unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 
+unique(recent_rating$Company.Location) #gives us the possible values of a factor in choco Company.Location data. The level shows the possible values of a categorical variable.
 
-recent_rating$Company.Location = droplevels(recent_rating$Company.Location)
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location) #droplevels drops an object from which to drop unused factor levels. This line is updating the recent_rating so that it won't have any unused Company.Location levels.
 
-head(recent_rating)
+head(recent_rating) #it shows us the first part of the recent_rating vector
 
-cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location)
-cross_table
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location) #it shows the Review.Date, Company.Location data from recent_rating vector as a table and saves that into cross_table variable.
+cross_table #displays the cross_table
 
-which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0)
+which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0) #only shows the column that does not have 0s. For example, cross_table[1,]!=0 means the first cross table that is not 0.
 
 france_recent = subset(recent_rating,Company.Location =='France')
 uk_recent = subset(recent_rating,Company.Location =='U.K.')
-germany_recent = subset(recent_rating,Company.Location=='Germany')
+germany_recent = subset(recent_rating,Company.Location=='Germany') #this stores all the subsets of vectors which Company.Location is France, U.K, Germany in according variables.
 
-par(mfrow=c(2,2))
-color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green')
-plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") 
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18)
+par(mfrow=c(2,2)) #sets the parameter with a variable mfrow which stores column 2 and row 2
+color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green') #sets the color blue if the Rating of france_recent dataframe is larger than the median of all the Rating of france_recent and sets the color green otherwise.
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") #plots a dot plot with y axis limit of 50 to 90(ylim), color as the green and blue color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as "Review Date"(xlab), labels y-axis as "Cocoa Percentage"(ylab), and looks the data from "France" dataframe(main).
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color blue and green, and sets the point shape as diamond like above.
 
-color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red')
-plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18)
+color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red') #sets another color set where it is purple when uk_recent Rating is larger than the median of the whole uk_recent Rating and red otherwise.
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK") #plots a dot plot with y axis limit of 50 to 90(ylim), color as the purle and red color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as "Review Date"(xlab), labels y-axis as "Cocoa Percentage"(ylab), and looks the data from "UK" dataframe(main).
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color purple and red, and sets the point shape as diamond like above.
 
-color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')
-plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") 
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)
+color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow') #sets another color set where it is orange when uk_recent Rating is larger than the median of the whole uk_recent Rating and yellow otherwise.
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") #plots a dot plot with y axis limit of 50 to 90(ylim), color as the orange and yellow color we setted from above(col), sets the point shape as diamond which is number 18(pch), sets the scaled relative to the 1.5 which is 50% larger(cex), labels x-axis as "Review Date"(xlab), labels y-axis as "Cocoa Percentage"(ylab), and looks the data from "Germany" dataframe(main).
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18) #sets the legend to be positioned on bottom right, shows High Rating and Low Rating, sets the column color orange and yellow, and sets the point shape as diamond like above.
 ```
 
 2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
