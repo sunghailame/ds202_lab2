@@ -7,22 +7,65 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Question set (team)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Discuss how to approach the following questions with your teammate. When finished, both teammate should collaborate on a single `team.Rmd` file which include the answers to the following questions. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Tips on coordinating as a team: 
+- You can start from Invididual 1 adding, committing, and pushing `team.Rmd`, and then Individual 2 can `git pull`
+- Before you make changes to existing files or `git push`, remember to `git pull` first
+- Coorindate with your teammate to avoid merge conflict!
+- Make sure both teammates have modified `team.Rmd` file! Users who have modified this file can be viewed by issuing `git log team.Rmd` in the Terminal.
 
-```{r cars}
-summary(cars)
+
+1 \. Run the following code line by line to figure out what it's doing. Then next to each line of code, write a comment explaining its purpose and function, including the use of any specific arguments. Comments in R are proceeded by a `#`, so that R knows not to run anything after the hashtag. 
+
+For example: 
+```{r,eval=FALSE}
+plot(choco$Rating,choco$Cocoa.Pct, xlab = "Ratings", ylab = "Cocoa Percentage", pch = 2, cex=2) # creates a plot with Ratings on x-axis and Cocoa Percentage of y-axis. The symbol of points is set to be a triangle (pch=2) and the size of the points is adjusted to be larger (cex=2). 
 ```
 
-## Including Plots
+If you are stuck, you can always go to R's help documentation. 
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, eval=FALSE}
+recent_rating = choco[choco$Review.Date>2011,]
+
+unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 
+
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location)
+
+head(recent_rating)
+
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location)
+cross_table
+
+which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0)
+
+france_recent = subset(recent_rating,Company.Location =='France')
+uk_recent = subset(recent_rating,Company.Location =='U.K.')
+germany_recent = subset(recent_rating,Company.Location=='Germany')
+
+par(mfrow=c(2,2))
+color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green')
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18)
+
+color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red')
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18)
+
+color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
+
+3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
+
+4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
+
+5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
+
+6 \. Bonus points (optional): Answer the question from the dataset.
