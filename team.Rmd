@@ -62,6 +62,8 @@ legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yello
 
 2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
 
+-Germany's Figure margins are too large. Also suggest to set the y limit as 60 up to 90 to remove the white space at the bottom of the chart. 
+
 3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
 
 4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
