@@ -62,12 +62,20 @@ legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yello
 
 2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
 
--Germany's Figure margins are too large. Also suggest to set the y limit as 60 up to 90 to remove the white space at the bottom of the chart. 
+- Germany's Figure margins are too large. Also suggest to set the y limit as 60 up to 90 to remove the white space at the bottom of the chart. 
 
 3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+plot(choco$Review.Date, choco$Rating)
+```
+
+- As you can see from above, it seems like 2006 and 2008 had more number of ratings compared to later years. The number of ratings are decreasing year by year.
 
 4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
 
 5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
+
+- Does the specific bean origin affect the ratings? If it does, which origin has the highest average rating?
 
 6 \. Bonus points (optional): Answer the question from the dataset.
