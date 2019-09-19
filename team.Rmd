@@ -1,5 +1,6 @@
 ---
 title: "Lab2 Collaboration"
+author: "Yealim Sung, Elcy Timothy"
 output: html_document
 ---
 
