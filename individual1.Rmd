@@ -1,5 +1,6 @@
 ---
 title: "Lab2"
+author: "Yealim Sung"
 output: html_document
 ---
 
@@ -14,11 +15,23 @@ Coordinate with your teammate and decide among you who is Individual 1 and Indiv
 **For each of the questions below provide at least one graphic as a basis for your answer.**
 
 1. How are ratings distributed? Don't forget to mention outliers, if there are any.
-- The rating is normally concentrated on 2.5 to 3.5. 
+ 
 ```{r}
 choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
 hist(choco$Rating)
 ```
 
+- The rating is normally concentrated on 2.5 to 3.5.This also means that the it has left-skewed distribution. By looking at the graph, it seems like there might be outliers on 4 to 5.
+
 2. Do ratings depend on the cacao percentage of a chocolate bar? 
+
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+plot(choco$Cocoa.Pct, choco$Rating)
+```
+
+- It does not seem like the ratings depend on the cacao percentage.
+
 3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.)
+
+- Company location's type is factor. Character and factor are similar but factor has predefined levels. That means their value can only be one of those levels or else it will be null value. However, characters can be anything. 
