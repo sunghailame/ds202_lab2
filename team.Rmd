@@ -73,6 +73,17 @@ plot(choco$Review.Date, choco$Rating)
 - As you can see from above, it seems like 2006 and 2008 had more number of ratings compared to later years. The number of ratings are decreasing year by year.
 
 4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
+```{r}
+##order(choco$Company.Location)
+temp = choco[order(choco$Rating),]
+head(temp)
+Loc1 = choco[choco$Company.Location == "Canada",]
+Loc2 = choco[choco$Company.Location == "U.S.A.",]
+Loc3 = choco[choco$Company.Location == "France",]
+z <- c("Canada","U.S.A.","France")
+boxplot(Loc1$Rating, Loc2$Rating,Loc3$Rating, xlab="Country", ylab = 'Rating', main = "Rating Distribution of top 3 countries", names = z)
+```
+
 
 5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
